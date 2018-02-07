@@ -147,7 +147,7 @@ function getNearbyCities(currentLocation) {
         "Berkeley",
         "Daly City"
     ];
-        if (debug) { console.log(citiesList); }
+    if (debug) { console.log(citiesList); }
     return citiesList
 }
 
@@ -165,42 +165,46 @@ function housingDataStale() {
 function loadHousingData(citiesList) {
     if (debug) { console.log("function loadHousingData:"); }
 
+    // for each indicator code within each city,
+    // fetch the most recent sample from Quandle and
+    // write into firebase.  
 
-    var city = "San Francisco";
-    var B1 = 3000;
-    var B2 = 3500;
-    var PH = 700;
+    // child is:
+    //      /cities/{cityname}/{indicatorCode} : value
 
-    // Save the new price in Firebase
-    dataRef.ref("/" + city).set({
-        oneBedroom: B1,
-        twoBedroom: B2,
-        potHole: PH
-    });
+    for (var k = 0; k < citiesList.length; k++) {
+        var targetcity = citiesList[k];
+        for (var i = 0; i < cityCodes.length; i++) {
 
-    var city = "San Mateo";
-    var B1 = 1000;
-    var B2 = 1200;
-    var ST = 600;
+            var city = cityCodes[i][0]; // grab the name of the city
+            var code = cityCodes[i][1]; // grab the code for Quandle
 
+            if (city !== targetcity) { continue; }
+            if (debug) { console.log(targetcity); }
+            for (var j = 0; j < indicatorCodes.length; j++) {
 
-    // Save the new price in Firebase
-    dataRef.ref("/" + city).set({
-        oneBedroom: B1,
-        twoBedroom: B2,
-        studio: ST
-    });
+                var indicator = indicatorCodes[j]; // grab each indicator code for Quandle
 
-    var city = "Alameda";
-    var B1 = 700;
-    var B2 = 900;
-    var ST = 200;
+                // ZILLOW/{AREA_CATEGORY}{AREA_CODE}_{INDICATOR_CODE}
+                var queryURL = "https://www.quandl.com/api/v3/datasets/ZILLOW/";
+                queryURL = queryURL + "C" + code + "_" + indicator;
+                queryURL = queryURL + ".json?api_key=xec-Z333cB8oHBtxz_kB&rows=1";
+                var price;
+                $.ajax({
+                    url: queryURL,
+                    headers: { 'Access-Control-Allow-Origin': '*' },
+                    async: true,
+                    method: 'GET'
+                }).then(function(response) {
+                    // console.log(response);
+                    price = response.dataset.data[0][1];
+                    console.log(price);
 
-
-    // Save the new price in Firebase
-    dataRef.ref("/" + city).set({
-        oneBedroom: B1,
-        twoBedroom: B2,
-        studio: ST
-    });
-}
+                    // Save the price in Firebase
+                    dataRef.ref("cities/" + city).update({ indicator: price });
+                    console.log("write: " + indicator + ":" + price);
+                }, function(response, xhdr, err) { console.log("Error: " + response); });
+            };
+        };
+    };
+};
