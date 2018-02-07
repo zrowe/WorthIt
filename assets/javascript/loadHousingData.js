@@ -171,40 +171,46 @@ function loadHousingData(citiesList) {
 
     // child is:
     //      /cities/{cityname}/{indicatorCode} : value
-
+    //
     for (var k = 0; k < citiesList.length; k++) {
+
         var targetcity = citiesList[k];
+
         for (var i = 0; i < cityCodes.length; i++) {
 
-            var city = cityCodes[i][0]; // grab the name of the city
-            var code = cityCodes[i][1]; // grab the code for Quandle
+            if (cityCodes[i][0] === targetcity) {
 
-            if (city !== targetcity) { continue; }
-            if (debug) { console.log(targetcity); }
-            for (var j = 0; j < indicatorCodes.length; j++) {
+                if (debug) { console.log("TargetCity: " + targetcity); }
 
-                var indicator = indicatorCodes[j]; // grab each indicator code for Quandle
+                for (var j = 0; j < indicatorCodes.length; j++) {
 
-                // ZILLOW/{AREA_CATEGORY}{AREA_CODE}_{INDICATOR_CODE}
-                var queryURL = "https://www.quandl.com/api/v3/datasets/ZILLOW/";
-                queryURL = queryURL + "C" + code + "_" + indicator;
-                queryURL = queryURL + ".json?api_key=xec-Z333cB8oHBtxz_kB&rows=1";
-                var price;
-                $.ajax({
-                    url: queryURL,
-                    headers: { 'Access-Control-Allow-Origin': '*' },
-                    async: true,
-                    method: 'GET'
-                }).then(function(response) {
-                    // console.log(response);
-                    price = response.dataset.data[0][1];
-                    console.log(price);
+                    getCityMetricPair(cityCodes[i][0], cityCodes[i][1], indicatorCodes[j])
 
-                    // Save the price in Firebase
-                    dataRef.ref("cities/" + city).update({ indicator: price });
-                    console.log("write: " + indicator + ":" + price);
-                }, function(response, xhdr, err) { console.log("Error: " + response); });
+                }; // J loop
             };
-        };
-    };
+        }; // i loop
+    }; // k loop
 };
+
+
+function getCityMetricPair(city, citycode, indicator) {
+
+    // ZILLOW/{AREA_CATEGORY}{AREA_CODE}_{INDICATOR_CODE}
+    var queryURL = "https://www.quandl.com/api/v3/datasets/ZILLOW/";
+    queryURL = queryURL + "C" + citycode + "_" + indicator;
+    queryURL = queryURL + ".json?api_key=xec-Z333cB8oHBtxz_kB&rows=1";
+
+    $.ajax({
+        url: queryURL,
+        headers: { 'Access-Control-Allow-Origin': '*' },
+        async: false,
+        method: 'GET'
+    }).then(function(response) {
+            // Save city, housing type, price
+            var pair = {};
+            pair[indicator] = response.dataset.data[0][1];
+            dataRef.ref("cities/" + city).update(pair);
+            console.log("write: " + JSON.stringify(pair));
+        },
+        function(response) { console.log("Error: " + response); });
+}
