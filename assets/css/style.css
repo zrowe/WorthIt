@@ -91,7 +91,7 @@ h1, h2, .title{
 {
 	background: url("http://static6.businessinsider.com/image/5829f58546e27ab6608b5fc1/facebook-is-dropping-35-million-to-lease-a-beautiful-earthquake-resistant-skyscraper-in-san-francisco--take-a-look-inside.jpg");
 	background-size: cover; 
-	height: 315px;
+	height: 315 px;
 
 
 }
@@ -110,15 +110,9 @@ h1, h2, .title{
 {
 	background: url("http://www.bridgetheworld.com/static/btwuk_division_web_live/assets/BTW_Images/manhattan-skyline-banner.jpg");
 	background-size: cover;
-	text-align: ce
+	text-align: center;
 
 }
-
-
-
-
-
-
 
 
 
