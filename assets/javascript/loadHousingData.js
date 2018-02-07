@@ -66,3 +66,41 @@ function loadHousingData(citiesList) {
         studio: ST
     });
 }
+
+// Example  data endpoints:
+//
+// ZILLOW/C9_MRP2B - Zillow Home Value Index (City): Median Rental Price - Two Bedrooms - San Francisco, CA
+// ZILLOW/C9_MRP1B - Zillow Home Value Index (City): Median Rental Price - One Bedroom - San Francisco, CA
+// ZILLOW/C9_MRPAH - Zillow Home Value Index (City): Median Rental Price - All Homes - San Francisco, CA
+// ZILLOW/C9_MRP3B - Zillow Home Value Index (City): Median Rental Price - Three Bedrooms - San Francisco, CA
+// ZILLOW/C9_MRPDT - Zillow Home Value Index (City): Median Rental Price - Duplex/Triplex - San Francisco, CA
+// ZILLOW/C9_MRPST - Zillow Home Value Index (City): Median Rental Price - Studio - San Francisco, CA
+// ZILLOW/C9_MRPMF - Zillow Home Value Index (City): Median Rental Price - Multi-Family Residence - San Francisco, CA
+// ZILLOW/C9_MRPSF - Zillow Home Value Index (City): Median Rental Price - Single-Family Residence - San Francisco, CA
+// ZILLOW/C9_MRP4B - Zillow Home Value Index (City): Median Rental Price - Four Bedrooms - San Francisco, CA
+// ZILLOW/C9_MRPCC - Zillow Home Value Index (City): Median Rental Price - Condo/Co-op - San Francisco, CA
+
+
+// Indicator codes for Median Rental Price:
+
+// MRPST  - Studio
+// MRP1B  - One Bedroom
+// MRP2B  - Two Bedrooms
+// MRP3B  - Three Bedrooms
+// MRP4B  - Four Bedrooms
+// MR51B  - Five Or More Bedrooms
+// MRPCC  - Condo/Co-op
+// MRPDT  - Duplex/Triplex
+// MRPSF  - Single-Family Residence
+// MRPMF  - Multi-Family Residence
+// MRPAH  - All Homes
+
+
+
+
+// City Codes:
+//
+// C503 - South San Francisco, CA
+// C9 - San Francisco, CA
+// C3036 - Sausalito, CA
+
