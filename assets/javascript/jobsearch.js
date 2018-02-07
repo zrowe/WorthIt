@@ -1,7 +1,3 @@
-// TODO:
-// press enter to search, maybe clear out text
-// search only works one time
-
 $(document).ready(function(){
 
   // when button is clicked, send AJAX query to jobs API
@@ -17,31 +13,20 @@ $(document).ready(function(){
     // construct query URL
     var queryURL = baseURL + "description=" + description + "&" + "location=" + location;
 
-    console.log(queryURL);
-
-    // CORS requires a JSONP dataType
+    // API requires a JSONP dataType to avoid CORS issues
 
     $.ajax({
       url: queryURL,
       method: 'GET',
       dataType: 'jsonp'
     }).then(function(response) {
-      console.log(response);
 
-      //console.log("Title " + response["0"].title);
-      //console.log("Company " + response["0"].company);
-      //console.log("Description " + response["0"].description.substring(0, 100));
-      //console.log("GitHub Jobs URL " + response["0"].url)
-
+      // loop through the response, collect the URL, title, and company for the first five jobs returned
+      // create new list items on the page and make the text link to the source job application page
       for (var i = 0; i < 5; i++) {
-        console.log("hello");
-        // console.log("Title " + response[i].title);
-        //console.log("Company " + response[i].company);
-        //$("#job" + i).text(response[i].title + " - " + response[i].company);
         var jobUrl = response[i].url;
         var jobTitle = response[i].title;
         var jobCompany = response[i].company;
-        //<li id="job0" class="list-group-item">Cras justo odio</li>
         var $li = $("<li>");
         $li.attr("id", "job" + i);
         $li.addClass("list-group-item");
@@ -49,14 +34,9 @@ $(document).ready(function(){
         $a.text(jobTitle + " - " + jobCompany);
         $a.attr("href", jobUrl);
         $a.attr("target", "blank");
-        //console.log(a);
         $($li).append($a);
         $("#job-api-dump").append($li);
-
       }
-
     });
-
   });
-
 });
