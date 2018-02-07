@@ -113,17 +113,17 @@ var cityCodes = [
 // change this list:
 
 var indicatorCodes = [
-    MRPST, // Studio
-    MRP1B, // One Bedroom
-    MRP2B, // Two Bedrooms
-    MRP3B, // Three Bedrooms
-    MRP4B, // Four Bedrooms
-    MR51B, // Five Or More Bedrooms
-    MRPCC, // Condo/Co-op
-    MRPDT, // Duplex/Triplex
-    MRPSF, // Single-Family Residence
-    MRPMF, // Multi-Family Residence
-    MRPAH //  All Homes
+    "MRPST", // Studio
+    "MRP1B", // One Bedroom
+    "MRP2B", // Two Bedrooms
+    "MRP3B", // Three Bedrooms
+    "MRP4B", // Four Bedrooms
+    "MR51B", // Five Or More Bedrooms
+    "MRPCC", // Condo/Co-op
+    "MRPDT", // Duplex/Triplex
+    "MRPSF", // Single-Family Residence
+    "MRPMF", // Multi-Family Residence
+    "MRPAH" //  All Homes
 ];
 
 // do the work
@@ -147,6 +147,7 @@ function getNearbyCities(currentLocation) {
         "Berkeley",
         "Daly City"
     ];
+        if (debug) { console.log(citiesList); }
     return citiesList
 }
 
