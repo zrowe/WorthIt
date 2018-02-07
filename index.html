@@ -1,18 +1,137 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="utf-8">
-    <title>Worth It</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+	<title>
+	</title>
+	<link href="https://fonts.googleapis.com/css?family=Advent+Pro|Fugaz+One|Hammersmith+One|IM+Fell+French+Canon+SC|Julius+Sans+One|Limelight|Open+Sans+Condensed:300|Orbitron|Poiret+One|Raleway|Rock+Salt|Scope+One|Syncopate|Vidaloka" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="assets/javascript/jobsearch.js"></script>
+
 </head>
-
 <body>
-    <script type="text/javascript " src="assets/javascript/app.js "></script>
-</body>
 
+<div id="hero">
+	<div id="jumbo1" class="jumbotron">
+		<h1 id="Heading">Worth it</h1>
+		<h3 id="title">enter your dream job to find out if its worth it.</h3>
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<form id="search-form">
+					<div class="input-group">
+				      <input type="text" id="search-text" class="form-control" placeholder="Search for...">
+				      <span class="input-group-btn">
+				      <button class="btn btn-default" id="submit" type="button">Go!</button>
+				      </span>
+				  </div>
+				</form>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+		<div class="arrow-wrap">
+			<a href="#below-fold"><img id="arrow" src="assets/images/down-arrow.png"></a>
+		</div>
+	</div>  
+</div>
+<section id="below-fold">
+<div class="row">
+	<div class="col-md-8">		
+		<div id="job-background" class="jumbotron">
+			<ul id="job-api-dump" class="list-group">
+			</ul>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div id="jumbo4" class="jumbotron">
+			<div class="panel panel-default">
+				<div id="avg" class="panel-body">
+					<h1 id="avg-sal-dump">
+						HELLLO
+					</h1>
+			
+				</div>
+      
+			</div>
+		</div>
+	</div>
+</div>
+</section>
+<div class="row">
+	<div class="col-md-3"></div>
+	<div class="col-md-6">
+		<div id="filters" class="jumbotron">
+
+			<div class="panel panel-default">
+  				<div class="panel-body">
+  					<p>
+  						Choose a filter
+  					</p>
+  				</div>
+			</div>
+
+			<button type="button" class="btn btn-danger">Danger</button>
+			<br>
+			<br>
+			<button type="button" class="btn btn-danger">Danger</button>
+			<br>
+			<br>
+			<button type="button" class="btn btn-danger">Danger</button>
+     
+		</div>
+	</div>
+	<div class="col-md-3"></div>
+
+</div>
+	
+
+
+ 		
+ 	
+			
+		
+	
+
+
+
+<script type="text/javascript">
+$('a[href*="#"]')
+  // Remove links that don't actually link to anything
+  .not('[href="#"]')
+  .not('[href="#0"]')
+  .click(function(event) {
+    // On-page links
+    if (
+      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
+      && 
+      location.hostname == this.hostname
+    ) {
+      // Figure out element to scroll to
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+      // Does a scroll target exist?
+      if (target.length) {
+        // Only prevent default if animation is actually gonna happen
+        event.preventDefault();
+        $('html, body').animate({
+          scrollTop: target.offset().top
+        }, 1000, function() {
+          // Callback after animation
+          // Must change focus!
+          var $target = $(target);
+          $target.focus();
+          if ($target.is(":focus")) { // Checking if the target was focused
+            return false;
+          } else {
+            $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
+            $target.focus(); // Set focus again
+          };
+        });
+      }
+    }
+  });
+</script>
+</body>
 </html>
