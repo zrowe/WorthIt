@@ -1,7 +1,22 @@
+
+
+
+
+
+
 $(document).ready(function(){
+
+  //$("#job-background").hide();
+
 
   // when button is clicked, send AJAX query to jobs API
   $(document.body).on("click", "#submit", function() {
+    $("#job-background").show();
+    $("#jumbo4").show();
+    $("#filters").show();
+
+
+
 
     var baseURL = "https://jobs.github.com/positions.json?";
     var descriptionInput = $("#search-text").val().trim();

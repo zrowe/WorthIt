@@ -20,7 +20,7 @@ body
 	color: white;
 }
 #hero {
-	background: url("https://i.imgur.com/Kzyb3BE.gif") no-repeat center fixed;
+	background: url("https://i.imgur.com/Kzyb3BE.gif") no-repeat center ;
 	background-size: cover;
 	color: #fff;
 }
@@ -84,14 +84,17 @@ h1, h2, .title{
 {
 	color: black;
 	text-align: center;
+	margin-bottom: 10%; 
 }
 
 
 #job-background
+
 {
 	background: url("http://static6.businessinsider.com/image/5829f58546e27ab6608b5fc1/facebook-is-dropping-35-million-to-lease-a-beautiful-earthquake-resistant-skyscraper-in-san-francisco--take-a-look-inside.jpg");
 	background-size: cover; 
 	height: 315 px;
+	
 
 
 }
@@ -115,13 +118,10 @@ h1, h2, .title{
 }
 
 
-
-
-
-
-
-
-
+#jumbo4,#job-background,#filters
+{
+	display: none;
+}
 
 
 
