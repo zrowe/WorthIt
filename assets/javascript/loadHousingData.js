@@ -129,7 +129,7 @@ var indicatorCodes = [
 // do the work
 
 getNearbyCities(currentLocation); // generate cities list
-if (housingDataStale()) { loadHousingData(citiesList); }
+loadHousingData(citiesList); // will update houseing data if necessary.
 
 
 // function to get a list of cities neaby the city that it's called with
@@ -155,41 +155,111 @@ function getNearbyCities(currentLocation) {
 // test if data in housing data is new enough, if not new enough then call loadhousing data. 
 // otherwise, do nothing.
 
+
+
+// Determine which child keys in DataSnapshot have data.
+
 function housingDataStale() {
     if (debug) { console.log("function checkAgeOfHousingData:"); }
-    return true
+    var d = new Date();
+    var now = d.getTime(); // get now in UTC
+    var result;
+    // if date does not exist or date is older than x
+
+    return dataRef.ref("/metadata").once("value")
+        .then(function(snapshot) {
+            console.log("fresh snap: " + snapshot.val().lastUpdate);
+            if (snapshot.val().lastUpdate == -1) {
+            	console.log("lastupdate is -1");
+                result = true
+                return result
+            }
+            //604800000
+            if (snapshot.val().lastUpdate < now - 604800000) {
+                console.log("last update is old: " + snapshot.val().lastUpdate);
+
+                result = true;
+                return result
+            }
+           	console.log("lastupdate is OK");
+            result = false;
+            return result
+        })
+        .catch(function(error) {
+            console.log("Remove failed: " + error.message)
+            result = true
+            return result
+        });
 }
+
+
+//dataRef.ref().once("value")
+//    .then(function(snapshot) {
+//        	console.log(snapshot.val().lastUpdate);
+//        	       if (snapshot.val().lastUpdate == -1) {
+//        	result = true
+//            return result
+//        }
+//        //604800000
+//        if (snapshot.val().lastUpdate < now - 10000) {
+//        	console.log(snapshot.val().lastUpdate);
+//        		result = true
+//           return result
+//        }
+//        result = false
+//        return result
+//    })
+//    .catch(function(error) {
+//	    console.log("Remove failed: " + error.message)
+//	    result = true
+//	    return result
+//	  });
+//	  console.log("result",result);
+//}
+
 
 
 // based upon a list of cities, populate firebase with the cost data of each type of housing for each city
 function loadHousingData(citiesList) {
     if (debug) { console.log("function loadHousingData:"); }
 
-    // for each indicator code within each city,
-    // fetch the most recent sample from Quandle and
-    // write into firebase.  
+    console.log("inside loadHousingData", housingDataStale());
 
-    // child is:
-    //      /cities/{cityname}/{indicatorCode} : value
-    //
-    for (var k = 0; k < citiesList.length; k++) {
+    if (housingDataStale()) {
 
-        var targetcity = citiesList[k];
+        // write a timestamp -- do it at beginning to block aonyone else from starting an update.
+        var d = new Date();
+        var now = d.getTime(); // get now in UTC
 
-        for (var i = 0; i < cityCodes.length; i++) {
+        firebase.database().ref("metadata").set({ lastUpdate: now });
 
-            if (cityCodes[i][0] === targetcity) {
 
-                if (debug) { console.log("TargetCity: " + targetcity); }
+        // for each indicator code within each city,
+        // fetch the most recent sample from Quandle and
+        // write into firebase.  
 
-                for (var j = 0; j < indicatorCodes.length; j++) {
+        // child is:
+        //      /cities/{cityname}/{indicatorCode} : value
+        //
+        for (var k = 0; k < citiesList.length; k++) {
 
-                    getCityMetricPair(cityCodes[i][0], cityCodes[i][1], indicatorCodes[j])
+            var targetcity = citiesList[k];
 
-                }; // J loop
-            };
-        }; // i loop
-    }; // k loop
+            for (var i = 0; i < cityCodes.length; i++) {
+
+                if (cityCodes[i][0] === targetcity) {
+
+                    if (debug) { console.log("TargetCity: " + targetcity); }
+
+                    for (var j = 0; j < indicatorCodes.length; j++) {
+
+                        getCityMetricPair(cityCodes[i][0], cityCodes[i][1], indicatorCodes[j])
+
+                    }; // J loop
+                };
+            }; // i loop
+        }; // k loop
+    };
 };
 
 
@@ -213,4 +283,15 @@ function getCityMetricPair(city, citycode, indicator) {
             console.log("write: " + JSON.stringify(pair));
         },
         function(response) { console.log("Error: " + response); });
+}
+
+calculateAffordRanges(120000);
+
+function calculateAffordRanges(annualSalary) {
+    var x = []
+    x[0] = Math.floor(annualSalary / 12 * .25);
+    x[1] = Math.floor(annualSalary / 12 * .35);
+    x[2] = Math.floor(annualSalary / 12 * .50);
+    console.log("Monthly Ranges = " + x);
+    return x
 }
