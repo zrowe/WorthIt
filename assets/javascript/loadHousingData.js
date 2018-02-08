@@ -31,6 +31,7 @@ var cityCodes = [
     ["Cotati", "2770"],
     ["Cupertino", "537"],
     ["Danville", "641"],
+    ["Daly City", "221"],
     ["Dixon", "1516"],
     ["Dublin", "876"],
     ["East Palo Alto", "1198"],
@@ -141,11 +142,11 @@ function getNearbyCities(currentLocation) {
     if (debug) { console.log("function getNearbyCities:"); }
     citiesList = [
         "San Francisco",
+        "Daly City",
+        "South San Francisco",
         "Alameda",
         "Oakland",
-        "South San Francisco",
-        "Berkeley",
-        "Daly City"
+        "Berkeley"
     ];
     if (debug) { console.log(citiesList); }
     return citiesList
@@ -154,10 +155,6 @@ function getNearbyCities(currentLocation) {
 
 // test if data in housing data is new enough, if not new enough then call loadhousing data. 
 // otherwise, do nothing.
-
-
-
-// Determine which child keys in DataSnapshot have data.
 
 function housingDataStale() {
     if (debug) { console.log("function checkAgeOfHousingData:"); }
@@ -172,60 +169,36 @@ function housingDataStale() {
             if (snapshot.val().lastUpdate == -1) {
             	console.log("lastupdate is -1");
                 result = true
-                return result
             }
             //604800000
-            if (snapshot.val().lastUpdate < now - 604800000) {
+            else if (snapshot.val().lastUpdate < now - 30000) {
                 console.log("last update is old: " + snapshot.val().lastUpdate);
-
                 result = true;
-                return result
             }
-           	console.log("lastupdate is OK");
-            result = false;
-            return result
+            else{
+                console.log("lastupdate is OK");
+                result = false;
+            }
+           	return housingCallback(result);
         })
         .catch(function(error) {
             console.log("Remove failed: " + error.message)
             result = true
-            return result
+            return housingCallback(result);
         });
 }
-
-
-//dataRef.ref().once("value")
-//    .then(function(snapshot) {
-//        	console.log(snapshot.val().lastUpdate);
-//        	       if (snapshot.val().lastUpdate == -1) {
-//        	result = true
-//            return result
-//        }
-//        //604800000
-//        if (snapshot.val().lastUpdate < now - 10000) {
-//        	console.log(snapshot.val().lastUpdate);
-//        		result = true
-//           return result
-//        }
-//        result = false
-//        return result
-//    })
-//    .catch(function(error) {
-//	    console.log("Remove failed: " + error.message)
-//	    result = true
-//	    return result
-//	  });
-//	  console.log("result",result);
-//}
 
 
 
 // based upon a list of cities, populate firebase with the cost data of each type of housing for each city
 function loadHousingData(citiesList) {
     if (debug) { console.log("function loadHousingData:"); }
+    var variable =  housingDataStale();
+};
 
-    console.log("inside loadHousingData", housingDataStale());
-
-    if (housingDataStale()) {
+function housingCallback(boolean){
+    console.log(`Boolean ${boolean}`);
+    if (boolean) {
 
         // write a timestamp -- do it at beginning to block aonyone else from starting an update.
         var d = new Date();
@@ -260,8 +233,10 @@ function loadHousingData(citiesList) {
             }; // i loop
         }; // k loop
     };
-};
+}
 
+// go get and store the data for a single city/mrtic pair
+//TODO: handle 404 better.  404 occurs because not all cities have all the metrics.
 
 function getCityMetricPair(city, citycode, indicator) {
 
@@ -278,20 +253,11 @@ function getCityMetricPair(city, citycode, indicator) {
     }).then(function(response) {
             // Save city, housing type, price
             var pair = {};
-            pair[indicator] = response.dataset.data[0][1];
+            pair[indicator] = Math.round(response.dataset.data[0][1]);
             dataRef.ref("cities/" + city).update(pair);
             console.log("write: " + JSON.stringify(pair));
-        },
-        function(response) { console.log("Error: " + response); });
-}
-
-calculateAffordRanges(120000);
-
-function calculateAffordRanges(annualSalary) {
-    var x = []
-    x[0] = Math.floor(annualSalary / 12 * .25);
-    x[1] = Math.floor(annualSalary / 12 * .35);
-    x[2] = Math.floor(annualSalary / 12 * .50);
-    console.log("Monthly Ranges = " + x);
-    return x
+    })
+    .catch(function(error) {
+            console.log("Error:", error);  
+    });
 }
