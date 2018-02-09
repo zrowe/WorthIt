@@ -57,7 +57,7 @@ $(document).ready(function(){
     percents.low = Math.floor(percents.low * salary / 12);
     percents.medium = Math.floor(percents.medium * salary / 12);
     percents.high = Math.floor(percents.high * salary / 12);
-    var housingOptions = getHousingOptions(percents);
+    var housingOptions = showHousingOptions(percents);
     return housingOptions;
   }
 
