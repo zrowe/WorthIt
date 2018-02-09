@@ -20,6 +20,7 @@
     showHousingOptions(tiers);
 
     function showHousingOptions(tiers) {
+        $("tbody").empty()
 
         var query = firebase.database().ref("cities").orderByKey();
         query.once("value")
@@ -36,7 +37,6 @@
             });
 
         function displayCity(city, house, tiers) {
-
 
             console.log(city);
             var maxPayment = tiers.low
