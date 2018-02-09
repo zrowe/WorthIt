@@ -11,13 +11,13 @@
 //     };
 //     firebase.initializeApp(config);
 
-    var tiers = {
-        low: 2000,
-        medium: 3000,
-        high: 4000
-    }
+    // var tiers = {
+    //     low: 2000,
+    //     medium: 3000,
+    //     high: 4000
+    // }
 
-    showHousingOptions(tiers);
+    // showHousingOptions(tiers);
 
     function showHousingOptions(tiers) {
         $("tbody").empty()
