@@ -4,87 +4,164 @@
 	<title>
 	</title>
 	<link href="https://fonts.googleapis.com/css?family=Advent+Pro|Fugaz+One|Hammersmith+One|IM+Fell+French+Canon+SC|Julius+Sans+One|Limelight|Open+Sans+Condensed:300|Orbitron|Poiret+One|Raleway|Rock+Salt|Scope+One|Syncopate|Vidaloka" rel="stylesheet">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+	
+
+	<script type="text/javascript" src="assets/javascript/global.js"></script>
+	<script type="text/javascript" src="assets/javascript/loadHousingData.js"></script> 
+
 	<script src="assets/javascript/jobsearch.js"></script>
+	<script src="assets/javascript/showhousing.js"></script>
+	<script src="assets/javascript/salary.js"></script>
+
+	
+
 
 </head>
 <body>
+	<section id="Top-Section">
 
-<div id="hero">
-	<div id="jumbo1" class="jumbotron">
-		<h1 id="Heading">Worth it</h1>
-		<h3 id="title">enter your dream job to find out if its worth it.</h3>
-		<div class="row">
-			<div class="col-md-3"></div>
-			<div class="col-md-6">
-				<form id="search-form">
-					<div class="input-group">
-				      <input type="text" id="search-text" class="form-control" placeholder="Search for...">
-				      <span class="input-group-btn">
-				      <button class="btn btn-default" id="submit" type="button">Go!</button>
-				      </span>
-				  </div>
-				</form>
-			</div>
-			<div class="col-md-3"></div>
-		</div>
-		<div class="arrow-wrap">
-			<a href="#below-fold"><img id="arrow" src="assets/images/down-arrow.png"></a>
-		</div>
-	</div>  
-</div>
-<section id="below-fold">
-<div class="row">
-	<div class="col-md-8">		
-		<div id="job-background" class="jumbotron">
-			<ul id="job-api-dump" class="list-group">
-			</ul>
-		</div>
-	</div>
+		<div id="hero">
+			<div id="jumbo1" class="jumbotron">	
+				<h1 id="Heading">Worth it</h1>
+				<h3 id="title">Pick your dream job to find out if its worth it.</h3>
+				<div class="row">
+					<div class="col-md-3"></div>
+					<div class="col-md-6">
+						
+						<section id = "menu"> 
+							<div class="dropdown">
+							  <button class="btn-lg btn-danger" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    choose position here
+							  </button>
+							  <div class="dropdown-menu" id="job-menu" aria-labelledby="dropdownMenuButton">
+							    
+							  </div>
+							</div>
+						</section>
 
-	<div class="col-md-4">
-		<div id="jumbo4" class="jumbotron">
-			<div class="panel panel-default">
-				<div id="avg" class="panel-body">
-					<h1 id="avg-sal-dump">
-						HELLLO
-					</h1>
-			
+					</div>
+					<div class="col-md-3"></div>
 				</div>
-      
+				<div class="arrow-wrap">	
+					<a href="#below-fold"><img id="arrow" src="assets/images/down-arrow.png"></a>
+				</div>
+			</div>  
+		</div>
+
+	</section>
+
+
+
+<section id="middle-section">
+
+	<div class = "items">
+		<div class="row">
+			<div class="col-md-8">		
+				<div id="job-background" class="card">
+					<div class="card-body">
+						<p id="job-api-heading"></p>
+						<ul id="job-api-dump" class="list-group">
+							  
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div id="sal" class="card">
+					<div class="card-body">
+						<div class="card">
+							<div id="avg" class="card-body">
+								<h2 id="avg-sal-heading"></h2>
+								<p id="avg-sal-dump">
+									
+								</p>
+					
+							</div>
+		      			</div>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
+
+	<br>
+
+	
 </div>
+
 </section>
-<div class="row">
-	<div class="col-md-3"></div>
-	<div class="col-md-6">
-		<div id="filters" class="jumbotron">
 
-			<div class="panel panel-default">
-  				<div class="panel-body">
-  					<p>
-  						Choose a filter
-  					</p>
-  				</div>
-			</div>
+<section id="bottom-section">
+	
+	<div class="card" id="table-display">
+  		<div class="card-body">
+  			
+			<table class="table table-dark">
+			  <thead>
+			    <tr>
+			      <th>Location</th>
+			      <th>low</th>
+			      <th>medium</th>
+			      <th>high</th>
+			    </tr>
 
-			<button type="button" class="btn btn-danger">Danger</button>
-			<br>
-			<br>
-			<button type="button" class="btn btn-danger">Danger</button>
-			<br>
-			<br>
-			<button type="button" class="btn btn-danger">Danger</button>
-     
-		</div>
+			  </thead>
+			  <tbody id="info-output">
+			    <tr>
+			      <td>San Francisico</td>
+			      <td>1B</td>
+			      <td>2B</td>
+			      <td>3B</td>
+			    </tr>
+
+			    <tr>
+			      <td>Oakland</td>
+			      <td>2B</td>
+			      <td>1B</td>
+			      <td>3B</td>  
+			    </tr>
+
+			    <tr>
+			      <td>Hayward</td>
+			      <td>3B</td>
+			      <td>2B</td>
+			      <td>1B</td>
+			    </tr>
+			</tbody>
+		</table>
+
+
+
+
+  		</div>
 	</div>
-	<div class="col-md-3"></div>
 
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
 	
 
 
