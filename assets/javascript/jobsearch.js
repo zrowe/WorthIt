@@ -1,6 +1,5 @@
 // when button is clicked, send AJAX query to jobs API
 function getJobs(chosenJob) {
-  console.log("i am running");
 
   var baseURL = "https://jobs.github.com/positions.json?";
   var location = "san+francisco";
@@ -19,7 +18,6 @@ function getJobs(chosenJob) {
     method: "GET",
     dataType: "jsonp"
   }).then(function(response) {
-    console.log(response);
 
     // loop through the response, collect the URL, title, and company for the first five jobs returned
     // create new list items on the page and make the text link to the source job application page
