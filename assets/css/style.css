@@ -1,0 +1,133 @@
+
+/*font-family: 'Advent Pro', sans-serif;*/
+/*font-family: 'Rock Salt', cursive;*/
+/*font-family: 'Hammersmith One', sans-serif;*/
+/*font-family: 'IM Fell French Canon SC', serif;*/
+
+body
+{
+	background-color: black;
+	font-size: 18px;
+	/*font-family: 'Scope One', serif;*/
+	font-family: 'Open Sans Condensed', sans-serif;
+	/*font-family: 'Raleway', sans-serif;*/
+/*	font-family: 'Vidaloka', serif;*/
+}
+
+#Heading
+{
+	text-align: center;
+	color: white;
+}
+#hero {
+	background: url("https://i.imgur.com/Kzyb3BE.gif") no-repeat center ;
+	background-size: cover;
+	color: #fff;
+}
+
+#jumbo1
+{
+	background: rgba(0,0,0,.2) center;
+	min-height: 100vh;
+}
+#jumbo1 h1 {
+	margin-top: 8%;
+}
+#jumbo1 h3 {
+	color:#fff;
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-weight: 400;
+}
+#search-form {
+	margin-top: 12%;
+}
+
+.arrow-wrap {
+	text-align: center;
+    margin-top: 8%;
+}
+#arrow {
+	width: 55px;
+	height: 55px;
+	cursor: pointer;
+}
+h1, h2, .title{
+	text-transform: uppercase;
+	/*1*/
+	/*font-family: 'Limelight', cursive;  */
+	font-family: 'Poiret One', cursive;
+	/*font-family: 'Fugaz One', cursive; */
+
+
+	/*2*/
+	/*font-family: 'Syncopate', sans-serif;*/
+	/*font-family: 'Julius Sans One', sans-serif;*/
+	/*font-family: 'Orbitron', sans-serif;*/
+	
+}
+
+#jumbo2
+{
+	background: url("http://upload.wikimedia.org/wikipedia/commons/3/3b/San_Francisco_%28Evening%29.jpg");
+	background-size: cover; 
+	color: white;
+
+}
+
+#job-section
+{
+	text-align: center;
+
+}
+
+#title
+{
+	color: black;
+	text-align: center;
+	margin-bottom: 10%; 
+}
+
+
+#job-background
+
+{
+	background: url("http://static6.businessinsider.com/image/5829f58546e27ab6608b5fc1/facebook-is-dropping-35-million-to-lease-a-beautiful-earthquake-resistant-skyscraper-in-san-francisco--take-a-look-inside.jpg");
+	background-size: cover; 
+	height: 315 px;
+	
+
+
+}
+#job-api-dump
+{
+	opacity: 0.8
+
+}
+
+#avg
+{
+	height: 200px;
+}
+
+#filters
+{
+	background: url("http://www.bridgetheworld.com/static/btwuk_division_web_live/assets/BTW_Images/manhattan-skyline-banner.jpg");
+	background-size: cover;
+	text-align: center;
+
+}
+
+
+#jumbo4,#job-background,#filters
+{
+	display: none;
+}
+
+
+
+
+
+
+
+
+
