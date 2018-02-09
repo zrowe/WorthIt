@@ -1,15 +1,15 @@
-$(document).ready(function() {
+// $(document).ready(function() {
 
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyD-KLx5wiwcy7aXHqXzWMLhUkoAgv54mIk",
-        authDomain: "worth-it-7ba43.firebaseapp.com",
-        databaseURL: "https://worth-it-7ba43.firebaseio.com",
-        projectId: "worth-it-7ba43",
-        storageBucket: "worth-it-7ba43.appspot.com",
-        messagingSenderId: "469432360026"
-    };
-    firebase.initializeApp(config);
+//     // Initialize Firebase
+//     var config = {
+//         apiKey: "AIzaSyD-KLx5wiwcy7aXHqXzWMLhUkoAgv54mIk",
+//         authDomain: "worth-it-7ba43.firebaseapp.com",
+//         databaseURL: "https://worth-it-7ba43.firebaseio.com",
+//         projectId: "worth-it-7ba43",
+//         storageBucket: "worth-it-7ba43.appspot.com",
+//         messagingSenderId: "469432360026"
+//     };
+//     firebase.initializeApp(config);
 
     var tiers = {
         low: 2000,
@@ -92,4 +92,4 @@ $(document).ready(function() {
         };
     }
 // };
-});
+// });
