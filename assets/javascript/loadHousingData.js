@@ -1,6 +1,12 @@
-var debug = 1; // my handy console debug flag
-var currentLocation = "San Francisco" // hard coded for now
-var citiesList = []; // is in global.js
+var debug = false; // my handy console debug flag
+
+
+// ++++++++
+//
+// uncomment these if running this standalone.  These are in global.js
+
+// var currentLocation = "San Francisco" // hard coded for now
+// var citiesList = []; // is in global.js
 
 
 // cityCodes table contains the city code from Quandle
@@ -127,11 +133,6 @@ var indicatorCodes = [
     "MRPAH" //  All Homes
 ];
 
-// do the work
-
-getNearbyCities(currentLocation); // generate cities list
-loadHousingData(citiesList); // will update houseing data if necessary.
-
 
 // function to get a list of cities neaby the city that it's called with
 // this is likely the city where the user is searching for a job.
@@ -152,7 +153,6 @@ function getNearbyCities(currentLocation) {
     return citiesList
 }
 
-
 // test if data in housing data is new enough, if not new enough then call loadhousing data. 
 // otherwise, do nothing.
 
@@ -170,8 +170,8 @@ function housingDataStale() {
             	console.log("lastupdate is -1");
                 result = true
             }
-            //604800000
-            else if (snapshot.val().lastUpdate < now - 30000) {
+            else if (snapshot.val().lastUpdate < now - 604800000) {
+                // arbitrary 1 week delay on recache
                 console.log("last update is old: " + snapshot.val().lastUpdate);
                 result = true;
             }
@@ -187,7 +187,6 @@ function housingDataStale() {
             return housingCallback(result);
         });
 }
-
 
 
 // based upon a list of cities, populate firebase with the cost data of each type of housing for each city
@@ -236,7 +235,8 @@ function housingCallback(boolean){
 }
 
 // go get and store the data for a single city/mrtic pair
-//TODO: handle 404 better.  404 occurs because not all cities have all the metrics.
+
+// TODO: handle 404 better.  404 occurs because not all cities have all the metrics.
 
 function getCityMetricPair(city, citycode, indicator) {
 
@@ -261,3 +261,6 @@ function getCityMetricPair(city, citycode, indicator) {
             console.log("Error:", error);  
     });
 }
+
+getNearbyCities(currentLocation); // generate cities list based upon current location
+loadHousingData(citiesList); // will update housing data if necessary.

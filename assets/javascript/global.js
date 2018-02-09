@@ -1,9 +1,11 @@
-// <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
-
 
 // global variables
 var citiesList = [];     // list of nearby cites for looking up housing data
 var currentFilter = [];  // the current setting of the filter for the housing display
+var currentLocation = "San Francisco" // hard coded for now
+
+
+
 
 
 // Initialize Firebase
