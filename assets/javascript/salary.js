@@ -27,13 +27,16 @@ $(document).ready(function(){
 
   // determine which job in the drop-down list was clicked and get its text
   // the text needs to be sent to the job search API in another function
-  // look up the salary for the job clicked
+  // look up the salary for the job clicked and update the user interface
   $("body").on("click", "#job-menu a", function () {
     var chosenJob = $(this).text();
     var searchForJobs = getJobs(chosenJob);
     var avgSalary = salary[chosenJob];
     var avgSalaryFormatted = displayAsDollars(avgSalary)
+    $("#job-api-heading").text(chosenJob + " jobs near San Francisco");
     $("#avg-sal-dump").text(avgSalaryFormatted);
+    $("#avg-sal-heading").text("Average " + chosenJob + " salary in San Francisco");
+    calcAffordRanges(avgSalary);
     return searchForJobs;
   });
 
@@ -43,12 +46,19 @@ $(document).ready(function(){
     return salaryMonthly;
   }
 
-  // calculate percents of monthly salary (25, 30, and 35)
+  // calculate percents of monthly salary (25, 30, and 50)
+  // pass to getHousingOptions function to find housing at these levels
   function calcAffordRanges(salary) {
-    var low = Math.floor(0.25 * salary / 12);
-    var medium = Math.floor(0.30 * salary / 12);
-    var high = Math.floor(0.50 * salary / 12);
-    return [low, medium, high];
+    var percents = {
+      low : 0.25,
+      medium: 0.30,
+      high: 0.50
+    }
+    percents.low = Math.floor(percents.low * salary / 12);
+    percents.medium = Math.floor(percents.medium * salary / 12);
+    percents.high = Math.floor(percents.high * salary / 12);
+    var housingOptions = getHousingOptions(percents);
+    return housingOptions;
   }
 
   // display the salary values as a string in currency (US Dollar) format for the HTML page
