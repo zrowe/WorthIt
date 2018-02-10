@@ -125,12 +125,12 @@ var indicatorCodes = [
     "MRP2B", // Two Bedrooms
     "MRP3B", // Three Bedrooms
     "MRP4B", // Four Bedrooms
-    "MR51B", // Five Or More Bedrooms
-    "MRPCC", // Condo/Co-op
-    "MRPDT", // Duplex/Triplex
-    "MRPSF", // Single-Family Residence
-    "MRPMF", // Multi-Family Residence
-    "MRPAH" //  All Homes
+    "MR51B" // Five Or More Bedrooms
+    // "MRPCC", // Condo/Co-op
+    // "MRPDT", // Duplex/Triplex
+    // "MRPSF", // Single-Family Residence
+    // "MRPMF", // Multi-Family Residence
+    // "MRPAH" //  All Homes
 ];
 
 
@@ -143,11 +143,11 @@ function getNearbyCities(currentLocation) {
     if (debug) { console.log("function getNearbyCities:"); }
     citiesList = [
         "San Francisco",
-        "Daly City",
-        "South San Francisco",
-        "Alameda",
         "Oakland",
-        "Berkeley"
+        "Berkeley",
+        "San Mateo",
+        "San Rafael",
+        "Livermore"
     ];
     if (debug) { console.log(citiesList); }
     return citiesList
