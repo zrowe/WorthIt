@@ -2,6 +2,8 @@
 
 WorthIT can help you decide if you can work in a location and find affordable housing. First, you can search for available jobs and see the average salary for that position. Then, you can see the rental housing options, including number of bedrooms and locations, that you can get at various percentages of that salary.
 
+(add screenshots, animated GIFs)
+
 ## Get started
 
 The app is deployed on https://zrowe.github.io/WorthIt/.
@@ -25,15 +27,15 @@ To run locally for development purposes, clone this repository and open `index.h
 
 ## Contributors
 
-- [Jack Fang](@jackfang415)
-- [Rhonda Glennon](@rmglennon)
-- [Jose Perez](@jperez650)
-- [Paul Rowe](@zrowe)
-- [Akhil Sompalli](@sompaak)
+- [Jack Fang](https://github.com/jackfang415)
+- [Rhonda Glennon](https://github.com/rmglennon)
+- [Jose Perez](https://github.com/jperez650)
+- [Paul Rowe](https://github.com/zrowe)
+- [Akhil Sompalli](https://github.com/sompaak)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License; see the [LICENSE.md](LICENSE.md) file for details.
 
 ## Acknowledgments and data credits
 
