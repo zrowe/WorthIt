@@ -1,8 +1,8 @@
 # WorthIT
 
-WorthIT can help you decide if you can work in a location and find affordable housing. First, you can search for available jobs and see the average salary for that position. Then, you can see the rental housing options, including number of bedrooms and locations, that you can get at various percentages of that salary.
+WorthIT can help you decide if you can work in a location and find affordable housing. First, you can search for available jobs and see the average salary for that position. Then, you can see the rental housing options, including number of bedrooms and locations, that you can get at various percentages of that salary. This can help you decide if it is worth it for you to accept a job offer and how much you will need to spend to find a rental that matches your needs.
 
-(add screenshots, animated GIFs)
+![animated gif showing start screen of app](animated-dropdown.gif)
 
 ## Get started
 
@@ -39,9 +39,7 @@ This project is licensed under the MIT License; see the [LICENSE.md](LICENSE.md)
 
 ## Acknowledgments and data credits
 
-(add links)
-
-- GitHub Jobs API
-- Glassdoor salary data
-- Quandl
+- Job postings are from the [GitHub Jobs API](https://jobs.github.com/api)
+- Estimates provided by [Glassdoor](https://www.glassdoor.com/Salaries/index.htm) and based on salaries submitted anonymously to Glassdoor as of February 2018.
+- Rental housing data is from the [Quandl API](https://www.quandl.com/data/ZILLOW-Zillow-Real-Estate-Research) for Zillow Real Estate Research.
 - Amber and Jerome for feedback and review
