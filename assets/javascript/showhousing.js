@@ -1,63 +1,39 @@
-// $(document).ready(function() {
+// Given an object containing "low", "medium" and "high" payments,
+// plot the housing options into the housing display.
+function showHousingOptions(tiers) {
+    $("tbody").empty()
 
-//     // Initialize Firebase
-//     var config = {
-//         apiKey: "AIzaSyD-KLx5wiwcy7aXHqXzWMLhUkoAgv54mIk",
-//         authDomain: "worth-it-7ba43.firebaseapp.com",
-//         databaseURL: "https://worth-it-7ba43.firebaseio.com",
-//         projectId: "worth-it-7ba43",
-//         storageBucket: "worth-it-7ba43.appspot.com",
-//         messagingSenderId: "469432360026"
-//     };
-//     firebase.initializeApp(config);
+    var query = firebase.database().ref("cities").orderByKey();
+    query.once("value")
 
-    // var tiers = {
-    //     low: 2000,
-    //     medium: 3000,
-    //     high: 4000
-    // }
-
-    // showHousingOptions(tiers);
-
-    function showHousingOptions(tiers) {
-        $("tbody").empty()
-
-        var query = firebase.database().ref("cities").orderByKey();
-        query.once("value")
-
-            .then(function(snapshot) {
-                // snapshot.forEach(function(childSnapshot){
-                var key = snapshot.key;
-                var childData = snapshot.val();
-
-                Object.keys(childData).forEach(function(key) {
-
-                    displayCity(key, childData[key], tiers);
-                });
+        .then(function(snapshot) {
+            var key = snapshot.key;
+            var childData = snapshot.val();
+            Object.keys(childData).forEach(function(key) {
+                displayCity(key, childData[key], tiers);
             });
+        });
 
-        function displayCity(city, house, tiers) {
+    // matchup price vs payment for a city and push to housing options view.
+    function displayCity(city, house, tiers) {
 
-            console.log(city);
-            var maxPayment = tiers.low
-            console.log("low")
-            var lowTier = showTier(house, maxPayment);
-     
-            console.log("medium")
-            var maxPayment = tiers.medium
-            var midTier = showTier(house, maxPayment);
-           
-            console.log("high")
-            var maxPayment = tiers.high
-            var highTier = showTier(house, maxPayment);
-            
-            writeRow(city, lowTier, midTier, highTier);
-        }
+        var maxPayment = tiers.low
+        var lowTier = showTier(house, maxPayment);
 
-        function writeRow(city, t1, t2, t3) {
-          var a =  $("#info-output");
+        var maxPayment = tiers.medium
+        var midTier = showTier(house, maxPayment);
 
-          a.append(`<tr>
+        var maxPayment = tiers.high
+        var highTier = showTier(house, maxPayment);
+
+        writeRow(city, lowTier, midTier, highTier);
+    }
+
+    // write a row to the housing table view 
+    function writeRow(city, t1, t2, t3) {
+        var a = $("#info-output");
+
+        a.append(`<tr>
                       <td>
                         ${city}
                       </td>
@@ -71,25 +47,31 @@
                         ${t3}
                       </td>
                     <tr>`);
-  
-        }
-//Return the string containing housing options
-        function showTier(house, payment) {
 
-            var options = ""
-
-            Object.keys(house).forEach(function(key) {
-
-              var price = house[key]
-
-              if (payment >= price) {
-                 // console.log("key " + key + " price: " + price);
-                 options=options + key + " "
-              }
-            })
-
-            return options;
-        };
     }
-// };
-// });
+    //Return a string containing housing options given a price
+    function showTier(house, payment) {
+
+        var codes = {
+            MRP1B: "1 Bedroom",
+            MRP2B: "2 Bedroom",
+            MRP3B: "3 Bedroom",
+            MRP4B: "4 Bedroom",
+            MRPAH: "All Housing",
+            MRPCC: "Condo/Co-op",
+            MRPDT: "Duplex/Triplex",
+            MRPMF: "Multi-Family",
+            MRPSF: "Single-Family",
+            MRPST: "Studio",
+        };
+
+        var options = ""
+        Object.keys(house).forEach(function(key) {
+            var price = house[key]
+            if (payment >= price) {
+                options = options + codes[key] + "<br>" // put each on seperate line
+            }
+        })
+        return options;
+    };
+};
