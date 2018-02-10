@@ -165,24 +165,22 @@ function housingDataStale() {
 
     return dataRef.ref("/metadata").once("value")
         .then(function(snapshot) {
-            console.log("fresh snap: " + snapshot.val().lastUpdate);
+            if (debug) { console.log("fresh snap: " + snapshot.val().lastUpdate); };
             if (snapshot.val().lastUpdate == -1) {
-            	console.log("lastupdate is -1");
+                if (debug) { console.log("lastupdate is -1"); };
                 result = true
-            }
-            else if (snapshot.val().lastUpdate < now - 604800000) {
+            } else if (snapshot.val().lastUpdate < now - 604800000) {
                 // arbitrary 1 week delay on recache
-                console.log("last update is old: " + snapshot.val().lastUpdate);
+                if (debug) { console.log("last update is old: " + snapshot.val().lastUpdate); };
                 result = true;
-            }
-            else{
-                console.log("lastupdate is OK");
+            } else {
+                if (debug) { console.log("lastupdate is OK"); };
                 result = false;
             }
-           	return housingCallback(result);
+            return housingCallback(result);
         })
         .catch(function(error) {
-            console.log("Remove failed: " + error.message)
+            if (debug) { console.log("Remove failed: " + error.message) };
             result = true
             return housingCallback(result);
         });
@@ -192,11 +190,11 @@ function housingDataStale() {
 // based upon a list of cities, populate firebase with the cost data of each type of housing for each city
 function loadHousingData(citiesList) {
     if (debug) { console.log("function loadHousingData:"); }
-    var variable =  housingDataStale();
+    var variable = housingDataStale();
 };
 
-function housingCallback(boolean){
-    console.log(`Boolean ${boolean}`);
+function housingCallback(boolean) {
+    if (debug) { console.log(`Boolean ${boolean}`); };
     if (boolean) {
 
         // write a timestamp -- do it at beginning to block aonyone else from starting an update.
@@ -246,20 +244,20 @@ function getCityMetricPair(city, citycode, indicator) {
     queryURL = queryURL + ".json?api_key=xec-Z333cB8oHBtxz_kB&rows=1";
 
     $.ajax({
-        url: queryURL,
-        headers: { 'Access-Control-Allow-Origin': '*' },
-        async: false,
-        method: 'GET'
-    }).then(function(response) {
+            url: queryURL,
+            headers: { 'Access-Control-Allow-Origin': '*' },
+            async: false,
+            method: 'GET'
+        }).then(function(response) {
             // Save city, housing type, price
             var pair = {};
             pair[indicator] = Math.round(response.dataset.data[0][1]);
             dataRef.ref("cities/" + city).update(pair);
-            console.log("write: " + JSON.stringify(pair));
-    })
-    .catch(function(error) {
-            console.log("Error:", error);  
-    });
+            if (debug) { console.log("write: " + JSON.stringify(pair)); };
+        })
+        .catch(function(error) {
+            if (debug) { console.log("Error:", error); };
+        });
 }
 
 getNearbyCities(currentLocation); // generate cities list based upon current location
