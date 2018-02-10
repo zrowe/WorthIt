@@ -47,12 +47,12 @@ $(document).ready(function(){
     return salaryMonthly;
   }
 
-  // calculate percents of monthly salary (25, 30, and 50)
+  // calculate percents of monthly salary (30, 40, and 50 percents)
   // pass to getHousingOptions function to find housing at these levels
   function calcAffordRanges(salary) {
     var percents = {
-      low : 0.25,
-      medium: 0.30,
+      low : 0.30,
+      medium: 0.40,
       high: 0.50
     }
     percents.low = Math.floor(percents.low * salary / 12);
