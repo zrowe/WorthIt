@@ -33,9 +33,10 @@ $(document).ready(function(){
     var searchForJobs = getJobs(chosenJob);
     var avgSalary = salary[chosenJob];
     var avgSalaryFormatted = displayAsDollars(avgSalary)
-    $("#job-api-heading").text(chosenJob + " jobs near San Francisco");
+    $("#job-api-heading").text(chosenJob + " jobs near San Francisco (via GitHub Jobs)");
     $("#avg-sal-dump").text(avgSalaryFormatted);
     $("#avg-sal-heading").text("Average " + chosenJob + " salary in San Francisco");
+    $("#avg-sal-credit").text("Estimates provided by Glassdoor and based on salaries submitted anonymously to Glassdoor as of February 2018.");
     calcAffordRanges(avgSalary);
     return searchForJobs;
   });

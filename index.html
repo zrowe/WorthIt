@@ -12,19 +12,19 @@
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-	
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
-	
+
 
 	<script type="text/javascript" src="assets/javascript/global.js"></script>
-	<script type="text/javascript" src="assets/javascript/loadHousingData.js"></script> 
+	<script type="text/javascript" src="assets/javascript/loadHousingData.js"></script>
 
 	<script src="assets/javascript/jobsearch.js"></script>
 	<script src="assets/javascript/showhousing.js"></script>
 	<script src="assets/javascript/salary.js"></script>
 
-	
+
 
 
 </head>
@@ -32,20 +32,20 @@
 	<section id="Top-Section">
 
 		<div id="hero">
-			<div id="jumbo1" class="jumbotron">	
+			<div id="jumbo1" class="jumbotron">
 				<h1 id="Heading">Worth it</h1>
-				<h3 id="title">Pick your dream job to find out if its worth it.</h3>
+				<h3 id="title">Pick your dream job to find out if it's worth it.</h3>
 				<div class="row">
 					<div class="col-md-3"></div>
 					<div class="col-md-6">
-						
-						<section id = "menu"> 
+
+						<section id = "menu">
 							<div class="dropdown">
 							  <button class="btn-lg btn-danger" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							    choose position here
 							  </button>
 							  <div class="dropdown-menu" id="job-menu" aria-labelledby="dropdownMenuButton">
-							    
+
 							  </div>
 							</div>
 						</section>
@@ -53,10 +53,10 @@
 					</div>
 					<div class="col-md-3"></div>
 				</div>
-				<div class="arrow-wrap">	
+				<div class="arrow-wrap">
 					<a href="#below-fold"><img id="arrow" src="assets/images/down-arrow.png"></a>
 				</div>
-			</div>  
+			</div>
 		</div>
 
 	</section>
@@ -67,12 +67,12 @@
 
 	<div class = "items">
 		<div class="row">
-			<div class="col-md-8">		
+			<div class="col-md-8">
 				<div id="job-background" class="card">
 					<div class="card-body">
 						<p id="job-api-heading"></p>
 						<ul id="job-api-dump" class="list-group">
-							  
+
 						</ul>
 					</div>
 				</div>
@@ -85,9 +85,10 @@
 							<div id="avg" class="card-body">
 								<h2 id="avg-sal-heading"></h2>
 								<p id="avg-sal-dump">
-									
+
 								</p>
-					
+								<p id="avg-sal-credit"></p>
+
 							</div>
 		      			</div>
 					</div>
@@ -97,16 +98,16 @@
 
 	<br>
 
-	
+
 </div>
 
 </section>
 
 <section id="bottom-section">
-	
+
 	<div class="card" id="table-display">
   		<div class="card-body">
-  			
+
 			<table class="table table-dark">
 			  <thead>
 			    <tr>
@@ -129,7 +130,7 @@
 			      <td>Oakland</td>
 			      <td>2B</td>
 			      <td>1B</td>
-			      <td>3B</td>  
+			      <td>3B</td>
 			    </tr>
 
 			    <tr>
@@ -162,14 +163,14 @@
 
 
 </section>
-	
 
 
- 		
- 	
-			
-		
-	
+
+
+
+
+
+
 
 
 
@@ -181,8 +182,8 @@ $('a[href*="#"]')
   .click(function(event) {
     // On-page links
     if (
-      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
-      && 
+      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
+      &&
       location.hostname == this.hostname
     ) {
       // Figure out element to scroll to
