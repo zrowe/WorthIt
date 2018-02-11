@@ -30,7 +30,7 @@ function getJobs(chosenJob) {
       $li.attr("id", "job" + i);
       $li.addClass("list-group-item");
       var $a = $("<a>");
-      $a.text(jobCompany + " - " + jobTitle + " - " + jobLocation);
+      $a.text(jobTitle + " - " + jobCompany + " - " + jobLocation);
       $a.attr("href", jobUrl);
       $a.attr("target", "blank");
       $($li).append($a);
