@@ -62,9 +62,9 @@ $(document).ready(function(){
     return housingOptions;
   }
 
-  // display the salary values as a string in currency (US Dollar) format for the HTML page
+  // display the salary values as a string in currency (US Dollar) format for the HTML page using Numeral.js library
   function displayAsDollars(salary) {
-    var salaryFormatted = salary.toLocaleString("en-US", { style: "currency", currency: "USD" });
+    var salaryFormatted = numeral(salary).format("$0,0");
     return salaryFormatted;
   }
 
