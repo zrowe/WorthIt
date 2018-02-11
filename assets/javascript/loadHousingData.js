@@ -1,16 +1,7 @@
 var debug = false; // my handy console debug flag
 
-
-// ++++++++
-//
-// uncomment these if running this standalone.  These are in global.js
-
-// var currentLocation = "San Francisco" // hard coded for now
-// var citiesList = []; // is in global.js
-
-
-// cityCodes table contains the city code from Quandle
-// for ewach city in the bay area.  List list of cities
+// cityCodes table contains the city code from Quandl
+// for each city in the bay area.  List list of cities
 // in the bay area came from here:
 // https://en.wikipedia.org/wiki/List_of_cities_and_towns_in_the_San_Francisco_Bay_Area
 
@@ -134,10 +125,10 @@ var indicatorCodes = [
 ];
 
 
-// function to get a list of cities neaby the city that it's called with
+// function to get a list of cities 'nearby' the city that it's called with
 // this is likely the city where the user is searching for a job.
 // it should possibly return distance from ground zero as well, but
-// will ad when necessary.
+// will add when necessary.
 
 function getNearbyCities(currentLocation) {
     if (debug) { console.log("function getNearbyCities:"); }
@@ -180,7 +171,7 @@ function housingDataStale() {
             return housingCallback(result);
         })
         .catch(function(error) {
-            if (debug) { console.log("Remove failed: " + error.message) };
+            if (debug) { console.log("No lastUpdate key found -- this is good: " + error.message) };
             result = true
             return housingCallback(result);
         });
@@ -232,8 +223,7 @@ function housingCallback(boolean) {
     };
 }
 
-// go get and store the data for a single city/mrtic pair
-
+// Go get and store the data for a single city/metric pair
 // TODO: handle 404 better.  404 occurs because not all cities have all the metrics.
 
 function getCityMetricPair(city, citycode, indicator) {
@@ -243,22 +233,60 @@ function getCityMetricPair(city, citycode, indicator) {
     queryURL = queryURL + "C" + citycode + "_" + indicator;
     queryURL = queryURL + ".json?api_key=xec-Z333cB8oHBtxz_kB&rows=1";
 
-    $.ajax({
-            url: queryURL,
-            headers: { 'Access-Control-Allow-Origin': '*' },
-            async: false,
-            method: 'GET'
-        }).then(function(response) {
-            // Save city, housing type, price
+    addAjax({
+        url: queryURL,
+        headers: { 'Access-Control-Allow-Origin': '*' },
+        async: true,
+        method: 'GET',
+        success: function(result, status, xhr) {
             var pair = {};
-            pair[indicator] = Math.round(response.dataset.data[0][1]);
+            pair[indicator] = Math.round(result.dataset.data[0][1]);
             dataRef.ref("cities/" + city).update(pair);
-            if (debug) { console.log("write: " + JSON.stringify(pair)); };
-        })
-        .catch(function(error) {
-            if (debug) { console.log("Error:", error); };
-        });
-}
+            if (debug) { console.log("write: " + city + " " + JSON.stringify(pair)); };
+        },
+        error: function(xhr, status, error) {
+            if (debug) { console.log("Error:", xhr); };
+        }
+    });
+};
+
+
+// Limit concurrent jQuery ajax requests to at most 2 at a time, and queue the rest.
+// Quandl limits user to 1 active request and 1 queued, so 2 max.
+//   From: https://gist.github.com/OllieTerrance/158a4c436baa64c4324803467844b00f
+
+var ajaxReqs = 0;
+var ajaxQueue = [];
+var ajaxActive = 0;
+var ajaxMaxConc = 2; 
+
+function addAjax(obj) {
+    ajaxReqs++;
+    var oldSuccess = obj.success;
+    var oldError = obj.error;
+    var callback = function() {
+        ajaxReqs--;
+        if (ajaxActive === ajaxMaxConc) {
+            $.ajax(ajaxQueue.shift());
+        } else {
+            ajaxActive--;
+        }
+    }
+    obj.success = function(resp, xhr, status) {
+        callback();
+        if (oldSuccess) oldSuccess(resp, xhr, status);
+    };
+    obj.error = function(xhr, status, error) {
+        callback();
+        if (oldError) oldError(xhr, status, error);
+    };
+    if (ajaxActive === ajaxMaxConc) {
+        ajaxQueue.push(obj);
+    } else {
+        ajaxActive++;
+        $.ajax(obj);
+    }
+};
 
 getNearbyCities(currentLocation); // generate cities list based upon current location
 loadHousingData(citiesList); // will update housing data if necessary.
