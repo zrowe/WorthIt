@@ -40,7 +40,7 @@ This project is licensed under the MIT License; see the [LICENSE.md](LICENSE.md)
 ## Acknowledgments and data credits
 
 - Job postings are from the [GitHub Jobs API](https://jobs.github.com/api).
-- Salary estimates provided by [Glassdoor](https://www.glassdoor.com/Salaries/index.htm) and based on salaries submitted anonymously to Glassdoor, as of February 2018.
+- Salary estimates are provided by [Glassdoor](https://www.glassdoor.com/Salaries/index.htm) and based on salaries submitted anonymously to Glassdoor, as of February 2018.
 - Rental housing data is from the [Quandl API](https://www.quandl.com/data/ZILLOW-Zillow-Real-Estate-Research) for Zillow Real Estate Research, as of February 2018.
 - San Francisco background images are from [orboloops9 on imgur](https://imgur.com/gallery/Kzyb3BE) and [Israeli American Council](https://www.israeliamerican.org/sites/default/files/homepage-sf-city-1080.jpg).
 - Thanks to Amber and Jerome for feedback and review.
