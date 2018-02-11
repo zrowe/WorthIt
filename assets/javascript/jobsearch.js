@@ -19,9 +19,10 @@ function getJobs(chosenJob) {
     dataType: "jsonp"
   }).then(function(response) {
 
-    // loop through the response, collect the URL, title, and company for the first five jobs returned
+    // loop through the response, collect the URL, title, and company for the first five jobs returned (or the total number of responses if fewer than five are returned)
     // create new list items on the page and make the text link to the source job application page
-    for (var i = 0; i < 5; i++) {
+
+    for (var i = 0; (i < response.length) && (i < 5); i++) {
       var jobUrl = response[i].url;
       var jobTitle = response[i].title;
       var jobCompany = response[i].company;
