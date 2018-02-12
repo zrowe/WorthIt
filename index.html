@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>
+		Worth It
 	</title>
 	<link href="https://fonts.googleapis.com/css?family=Advent+Pro|Fugaz+One|Hammersmith+One|IM+Fell+French+Canon+SC|Julius+Sans+One|Limelight|Open+Sans+Condensed:300|Orbitron|Poiret+One|Raleway|Rock+Salt|Scope+One|Syncopate|Vidaloka" rel="stylesheet">
 
@@ -53,9 +54,7 @@
 					</div>
 					<div class="col-md-3"></div>
 				</div>
-				<div class="arrow-wrap">
-					<a href="#below-fold"><img id="arrow" src="assets/images/down-arrow.png"></a>
-				</div>
+				
 			</div>
 		</div>
 
@@ -83,10 +82,10 @@
 					<div class="card-body">
 						<div class="card">
 							<div id="avg" class="card-body">
-								<h2 id="avg-sal-heading"></h2>
-								<p id="avg-sal-dump">
+								<h3 id="avg-sal-heading"></h2>
+								<h2 id="avg-sal-dump"></h2>
 
-								</p>
+								
 								<p id="avg-sal-credit"></p>
 
 							</div>
@@ -112,9 +111,9 @@
 			  <thead>
 			    <tr>
 			      <th>Location</th>
-			      <th>low</th>
-			      <th>medium</th>
-			      <th>high</th>
+			      <th>30% of Salary</th>
+			      <th>40% of Salary</th>
+			      <th>50% of salary</th>
 			    </tr>
 
 			  </thead>
@@ -143,73 +142,13 @@
 		</table>
 
 
-
+			<p id="quandl">Data From Quandl Api</p>
 
   		</div>
 	</div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 </section>
 
-
-
-
-
-
-
-
-
-
-
-<script type="text/javascript">
-$('a[href*="#"]')
-  // Remove links that don't actually link to anything
-  .not('[href="#"]')
-  .not('[href="#0"]')
-  .click(function(event) {
-    // On-page links
-    if (
-      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
-      &&
-      location.hostname == this.hostname
-    ) {
-      // Figure out element to scroll to
-      var target = $(this.hash);
-      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-      // Does a scroll target exist?
-      if (target.length) {
-        // Only prevent default if animation is actually gonna happen
-        event.preventDefault();
-        $('html, body').animate({
-          scrollTop: target.offset().top
-        }, 1000, function() {
-          // Callback after animation
-          // Must change focus!
-          var $target = $(target);
-          $target.focus();
-          if ($target.is(":focus")) { // Checking if the target was focused
-            return false;
-          } else {
-            $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
-            $target.focus(); // Set focus again
-          };
-        });
-      }
-    }
-  });
-</script>
 </body>
 </html>
