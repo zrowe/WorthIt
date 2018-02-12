@@ -1,4 +1,3 @@
-
 /*font-family: 'Advent Pro', sans-serif;*/
 /*font-family: 'Rock Salt', cursive;*/
 /*font-family: 'Hammersmith One', sans-serif;*/
@@ -91,21 +90,21 @@ h1, h2, .title{
 #job-background
 
 {
-	background-size: cover; 
-	
-	
-
+	 background-color: 	#7CFC00
 
 }
 #job-api-dump
 {
 	opacity: 0.8;
 
+
 }
 
 #sal
 {
 	height: 305px;
+	background-color:#B22222;
+	text-align: center;
 }
 
 #filters
@@ -123,16 +122,6 @@ h1, h2, .title{
 }
 
 
-
-
-#middle-section
-{
-	background: url("https://www.israeliamerican.org/sites/default/files/homepage-sf-city-1080.jpg");
-	
-
-}
-
-
 .items
 {
 	opacity: 0.8;
@@ -143,9 +132,8 @@ h1, h2, .title{
 	background-color: black;
 }
 
-
-
-
-
-
+#quandl
+{
+	color: white;
+}
 
